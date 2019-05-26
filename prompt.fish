@@ -82,7 +82,12 @@ function fish_prompt --description 'Write out the prompt'
     set_color normal
 
     set -l job_count (jobs | wc -l)
-    set -l trash_count (type trash > /dev/null ^ /dev/null; and trash -c; or echo 0 )
+    set -l trash_count
+    if type trash-list > /dev/null ^ /dev/null
+        set trash_count (trash-list | wc -l)
+    else
+        set  trash_count "0"
+    end
     if test $last_status -ne 0 -o $job_count -gt 0 -o $trash_count -gt 0
         set_color $retc
         if [ $tty = tty ]
