@@ -1,5 +1,6 @@
+DEPENDS=("$PEARL_PKGREPONAME/trash-cli")
+
 function post_install() {
-    pearl emerge $PEARL_PKGREPONAME/trash-cli
     return 0
 }
 
